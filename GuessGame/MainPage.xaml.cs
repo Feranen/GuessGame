@@ -2,17 +2,38 @@
 {
     public partial class MainPage : ContentPage
     {
-        int count = 0;
         int targetGuess;
+        int maxGuess = 21;
 
         public MainPage()
         {
             InitializeComponent();
-            targetGuess = random.Next(1, 21);
+            targetGuess = random.Next(1, maxGuess);
         }
         public Random random = new Random();
         public int counter = 0;
         
+        private void OnLevelRadioButtonCheckedChanged(object sender, CheckedChangedEventArgs e)
+        {
+            //Change max number and clear try amount, user guess and entry
+            if (easyLevel.IsChecked)
+            {
+                maxGuess = 21;
+            }
+            else if (mediumLevel.IsChecked) {
+            
+                maxGuess = 51;
+            } else
+            {
+                maxGuess = 101;
+            }
+            targetGuess = random.Next(1, maxGuess);
+            counter = 0;
+            probylabel.Text = $"Próby: {counter}";
+            int userGuess = -100;
+            strzalEntry.Text = "";
+            podpowiedzLabel.Text = "Wpisz liczbe";
+        }
 
         private void OnSprawdz(object? sender, EventArgs e)
         {
@@ -46,13 +67,6 @@
                 podpowiedzLabel.Text = $"Trafione w {counter} próbach! Brawo!";
                 strzalEntry.Text = "";
             }
-
-            //if (count == 1)
-            //    CounterBtn.Text = $"Clicked {count} time";
-            //else
-            //    CounterBtn.Text = $"Clicked {count} times";
-
-            //SemanticScreenReader.Announce(CounterBtn.Text);
         }
     }
 }

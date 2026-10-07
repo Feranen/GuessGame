@@ -18,6 +18,14 @@
                 Text="Wpisz liczbe i kliknij Sprawdz"
                 x:Name="podpowiedzLabel"
                 />
+            <HorizontalStackLayout>
+                <RadioButton Content="Łatwy (1-21)" x:Name="easyLevel" CheckedChanged="OnLevelRadioButtonCheckedChanged"
+             GroupName="GuessLevel" />
+                <RadioButton Content="Średni (1-50)" x:Name="mediumLevel" CheckedChanged="OnLevelRadioButtonCheckedChanged"
+             GroupName="GuessLevel" />
+                <RadioButton Content="Trudny (1-100)" x:Name="hardLevel" CheckedChanged="OnLevelRadioButtonCheckedChanged"
+             GroupName="GuessLevel" />
+            </HorizontalStackLayout>
             <Entry Placeholder="twoja liczba..." x:Name="strzalEntry" Keyboard="Numeric">
             </Entry>
             <Button
