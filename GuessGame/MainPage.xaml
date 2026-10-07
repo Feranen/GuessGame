@@ -1,0 +1,34 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="GuessGame.MainPage">
+
+    <ScrollView>
+        <VerticalStackLayout
+            Padding="30,0"
+            Spacing="25">
+            <Label
+                Text="Zgadnij liczbe (1-20)"
+                FontAttributes="Bold,Italic"
+                Style="{StaticResource Headline}"
+                SemanticProperties.HeadingLevel="Level1" 
+                HorizontalTextAlignment="Center"/>
+                
+            <Label
+                Text="Wpisz liczbe i kliknij Sprawdz"
+                x:Name="podpowiedzLabel"
+                />
+            <Entry Placeholder="twoja liczba..." x:Name="strzalEntry" Keyboard="Numeric">
+            </Entry>
+            <Button
+                x:Name="sprawdzButton"
+                Text="Sprawdż"
+                Clicked="OnSprawdz"
+                 />
+            <Label
+                Text="próby: 0"
+                x:Name="probylabel"/>
+        </VerticalStackLayout>
+    </ScrollView>
+
+</ContentPage>
