@@ -2,9 +2,9 @@
 {
     public partial class MainPage : ContentPage
     {
-        int targetGuess;
+        double targetGuess;
         int maxGuess = 21;
-        int userGuess = -100;
+        double userGuess = -100;
 
         public MainPage()
         {
@@ -49,31 +49,76 @@
 
         private void OnSprawdz(object? sender, EventArgs e)
         {
-
+            
             userGuess = -100;
+            
             try {
                 if (string.IsNullOrEmpty(strzalEntry.Text))
                 {
                 podpowiedzLabel.Text = "Wpisz liczbe";
                     return;
                 }
-                userGuess = int.Parse(strzalEntry.Text);
+                userGuess = double.Parse(strzalEntry.Text);
             }
             catch (Exception)
             {
                 podpowiedzLabel.Text = "Wpisz poprawną liczbe";
                 return;
             }
+            // Divide user guess and target guess and to guess number result should be 1
+            double ratio = userGuess / targetGuess; // must be 1 to count as guessed
+
 
             counter++;
             probyLabel.Text = $"Próby: {counter}";
-            if (userGuess > targetGuess)
+            if (ratio < 1)
             {
-                podpowiedzLabel.Text = "Za dużo! Celuj niżej.";
-            } else if (userGuess < targetGuess)
+                /*🔥 Very close
+🟠 Close
+🟡 Warm
+❄️ Cold*/
+                if (ratio < 0.50)
+                {
+                    podpowiedzLabel.Text = "Za mało! Celuj wyżej. ❄️ Chłodno";
+                     
+                } else if (ratio < 0.70)
+                {
+                    podpowiedzLabel.Text = "Za mało! Celuj wyżej. 🟡 Ciepło";
+                    
+                    
+                }else if (ratio < 0.80)
+                {
+                    podpowiedzLabel.Text = "Za mało! Celuj wyżej. 🟠 Blisko";
+
+                }
+                else if (ratio < 0.90)
+                {
+                    podpowiedzLabel.Text = "Za mało! Celuj wyżej. 🔥 Bardzo blisko";
+
+                }
+            } else if (ratio > 1)
             {
-                podpowiedzLabel.Text = "Za mało! Celuj wyżej.";
-            } else
+                if (ratio > 1.50)
+                {
+                    podpowiedzLabel.Text = "Za dużo! Celuj niżej. ❄️ Chłodno";
+                }
+                else if (ratio > 1.30)
+                {
+                    podpowiedzLabel.Text = "Za dużo! Celuj niżej. 🟡 Ciepło";
+                }
+                else if (ratio > 1.20)
+                {
+                    
+                    podpowiedzLabel.Text = "Za dużo! Celuj niżej. 🟠 Blisko";
+
+                }
+                else if (ratio > 1)
+                {
+                    podpowiedzLabel.Text = "Za dużo! Celuj niżej. 🔥 Bardzo blisko";
+                    
+
+                }
+            } else if (ratio == 1)
             {
                 if (record > counter)
                 {
