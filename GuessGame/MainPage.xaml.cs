@@ -4,6 +4,7 @@
     {
         int targetGuess;
         int maxGuess = 21;
+        int userGuess = -100;
 
         public MainPage()
         {
@@ -12,6 +13,7 @@
         }
         public Random random = new Random();
         public int counter = 0;
+        int record = 1000;
         
         private void OnLevelRadioButtonCheckedChanged(object sender, CheckedChangedEventArgs e)
         {
@@ -29,8 +31,18 @@
             }
             targetGuess = random.Next(1, maxGuess);
             counter = 0;
-            probylabel.Text = $"Próby: {counter}";
-            int userGuess = -100;
+            probyLabel.Text = $"Próby: {counter}";
+            userGuess = -100;
+            strzalEntry.Text = "";
+            podpowiedzLabel.Text = "Wpisz liczbe";
+        }
+        private void OnFromStart(object sender, EventArgs e)
+        {
+            //Clear try amount, user guess and entry
+            targetGuess = random.Next(1, maxGuess);
+            counter = 0;
+            probyLabel.Text = $"Próby: {counter}";
+            userGuess = -100;
             strzalEntry.Text = "";
             podpowiedzLabel.Text = "Wpisz liczbe";
         }
@@ -38,7 +50,7 @@
         private void OnSprawdz(object? sender, EventArgs e)
         {
 
-            int userGuess = -100;
+            userGuess = -100;
             try {
                 if (string.IsNullOrEmpty(strzalEntry.Text))
                 {
@@ -54,8 +66,7 @@
             }
 
             counter++;
-            probylabel.Text = $"Próby: {counter}";
-
+            probyLabel.Text = $"Próby: {counter}";
             if (userGuess > targetGuess)
             {
                 podpowiedzLabel.Text = "Za dużo! Celuj niżej.";
@@ -64,9 +75,21 @@
                 podpowiedzLabel.Text = "Za mało! Celuj wyżej.";
             } else
             {
-                podpowiedzLabel.Text = $"Trafione w {counter} próbach! Brawo!";
+                if (record > counter)
+                {
+                    record = counter;
+                    
+                    recordLabel.Text = $"Rekord: {record}";
+                    
+                }
                 strzalEntry.Text = "";
+                
+                podpowiedzLabel.Text = $"Trafione w {counter} próbach! Brawo!";
+                counter = 0;
+
             }
+
+            
         }
     }
 }

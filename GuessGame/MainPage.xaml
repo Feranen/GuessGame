@@ -19,7 +19,7 @@
                 x:Name="podpowiedzLabel"
                 />
             <HorizontalStackLayout>
-                <RadioButton Content="Łatwy (1-21)" x:Name="easyLevel" CheckedChanged="OnLevelRadioButtonCheckedChanged"
+                <RadioButton Content="Łatwy (1-20)" x:Name="easyLevel" CheckedChanged="OnLevelRadioButtonCheckedChanged" IsChecked="True"
              GroupName="GuessLevel" />
                 <RadioButton Content="Średni (1-50)" x:Name="mediumLevel" CheckedChanged="OnLevelRadioButtonCheckedChanged"
              GroupName="GuessLevel" />
@@ -35,7 +35,15 @@
                  />
             <Label
                 Text="próby: 0"
-                x:Name="probylabel"/>
+                x:Name="probyLabel"/>
+            <Label
+                Text="Record: 0 "
+                x:Name="recordLabel"/>
+            <Button
+                x:Name="Recordbutton"
+                Text="Od nowa"
+                Clicked="OnFromStart"
+                 />
         </VerticalStackLayout>
     </ScrollView>
 
